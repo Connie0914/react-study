@@ -1,3 +1,4 @@
+import React from "react"
 import Head from 'next/head'
 import styles from 'src/styles/Home.module.css'
 import { Footer } from "src/components/Footer"
@@ -17,6 +18,7 @@ export default function Home() {
   const [count, setCount] = useState(1)
   const [text, setText] = useState("");
   const [isShow, setIsShow] = useState(true);
+  const [array, setArray] = useState([]);
 
 
   //* 簡潔に書ける.
@@ -39,6 +41,17 @@ export default function Home() {
     }
     setText(e.target.value.trim());
   }, []);
+
+  const handleAdd = useCallback(() => {
+    setArray((prevArray) => {
+      if(prevArray.some((item) => item === text)) {
+        alert("同じ要素が既に存在します。");
+        return prevArray;
+      }
+      const newArray = [...prevArray, text];
+      return newArray;
+    });
+  }, [text]);
   
   useEffect(() => { //* マウント時の処理
     document.body.style.backgroundColor = "lightblue";
@@ -63,6 +76,14 @@ export default function Home() {
         value={text}
         onChange={handleChange}
       />
+      <button onClick={handleAdd}>追加</button>
+      <ul>
+        {array.map(item => {
+          return (
+            <li key={item}>{item}</li>
+          )
+        })}
+      </ul>
       <Main page="index" />
       <Footer />
     </div>
