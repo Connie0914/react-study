@@ -1,9 +1,9 @@
 import React from "react"
-import Head from 'next/head'
-import { Footer } from 'src/components/Footer'
-import { Header } from 'src/components/Header'
-import { Main } from 'src/components/Main'
-import styles from 'src/styles/Home.module.css'
+import Head from "next/head"
+import { Footer } from "src/components/Footer"
+import { Header } from "src/components/Header"
+import { Main } from "src/components/Main"
+import styles from "src/styles/Home.module.css"
 
 export default function Home() {
   return (

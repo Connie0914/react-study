@@ -1,10 +1,10 @@
 import React from "react"
-import Head from 'next/head'
-import styles from 'src/styles/Home.module.css'
+import styles from "src/styles/Home.module.css"
+import Head from "next/head"
 import { Footer } from "src/components/Footer"
-import { Main } from 'src/components/Main'
-import { Header } from 'src/components/Header'
-import { useCallback, useEffect, useState } from 'react'
+import { Header } from "src/components/Header"
+import { Main } from "src/components/Main"
+import { useCallback, useEffect, useState } from "react"
 
   //* 引数がなかったり、煩雑にならない場合は外に書く.
   //* 再レンダリング時にメソッドが再生成されず、挙動が早いため.
@@ -32,7 +32,7 @@ export default function Home() {
 
   const handleDisplay = useCallback(() => {
     setIsShow((prevIsShow) => !prevIsShow);
-  });
+  }, []);
 
   const handleChange = useCallback((e) => {
     if (e.target.value.length > 5) {
@@ -48,8 +48,7 @@ export default function Home() {
         alert("同じ要素が既に存在します。");
         return prevArray;
       }
-      const newArray = [...prevArray, text];
-      return newArray;
+      return [...prevArray, text];
     });
   }, [text]);
   
@@ -71,17 +70,11 @@ export default function Home() {
       {isShow ? <h1>{count}</h1> : null}
       <button  onClick={handleClick}>ボタン</button>
       <button onClick={handleDisplay}>{isShow ? "非表示": "表示"}</button>
-      <input 
-        type="text"
-        value={text}
-        onChange={handleChange}
-      />
+      <input type="text" value={text} onChange={handleChange} />
       <button onClick={handleAdd}>追加</button>
       <ul>
-        {array.map(item => {
-          return (
-            <li key={item}>{item}</li>
-          )
+        {array.map((item) => {
+          return <li key={item}>{item}</li>;
         })}
       </ul>
       <Main page="index" />
