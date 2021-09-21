@@ -1,10 +1,9 @@
-import React from "react"
 import styles from "src/styles/Home.module.css"
 import Head from "next/head"
 import { Footer } from "src/components/Footer"
 import { Header } from "src/components/Header"
 import { Main } from "src/components/Main"
-import { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 
   //* 引数がなかったり、煩雑にならない場合は外に書く.
   //* 再レンダリング時にメソッドが再生成されず、挙動が早いため.
