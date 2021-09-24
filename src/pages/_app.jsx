@@ -1,14 +1,22 @@
 import React from "react";
 import Head from "next/head";
 import "src/styles/globals.css";
+import { useCounter } from "src/hooks/useCounter"
+import { useInputArray } from "src/hooks/useInputArray"
+import { useBgToLightBlue } from "src/hooks/useBgToLightBlue"
 
 function MyApp({ Component, pageProps }) {
+  const counter = useCounter();
+  const inputArray = useInputArray();
+  useBgToLightBlue();
+
+
   return (
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <Component {...pageProps} {...counter} {...inputArray} />
     </>
   )
 }

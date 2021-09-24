@@ -4,14 +4,9 @@ import Head from "next/head"
 import { Footer } from "src/components/Footer"
 import { Header } from "src/components/Header"
 import { Main } from "src/components/Main"
-import { useCounter } from "src/hooks/useCounter"
-import { useInputArray } from "src/hooks/useInputArray"
-import { useBgToLightBlue } from "src/hooks/useBgToLightBlue"
 
-export default function Home() {
-  const { count, isShow, handleClick, handleDisplay } = useCounter();
-  const { text, array, handleChange, handleAdd } = useInputArray();
-  useBgToLightBlue();
+export default function Home(props) {
+  const { count, isShow, handleClick, handleDisplay, text, array, handleChange, handleAdd } = props;
 
   return (
     <div className={styles.container}>
