@@ -1,7 +1,4 @@
-import React from 'react'
 import classes from 'src/components/Links/Links.module.css'
-
-
 
 export function Links({ items }) {
   return (
