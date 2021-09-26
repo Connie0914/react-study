@@ -14,6 +14,7 @@ export const useInputArray = () => {
 
   const handleAdd = useCallback(() => {
     setArray((prevArray) => {
+      //[{label: "foo"} ,{label:"bar"}]の場合はsomeがいい
       if(prevArray.some((item) => item === text)) {
         alert("同じ要素が既に存在します。");
         return prevArray;
