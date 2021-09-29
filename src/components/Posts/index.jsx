@@ -23,24 +23,23 @@ export const Posts = () => {
     getPosts();
   }, [getPosts])
 
+  if (loading) {
+    return <div>ローディング中</div>
+  }
+
+  if (error) {
+    return <div>{error.message}</div>
+  }
+
+  if (posts.length === 0) {
+    return <div>データは空です</div>
+  }
+
   return (
-    <div>
-      {loading ? (
-      <div>ローディング中</div>
-      ) : error ? (
-        <div>{error.message}</div>
-      ) : posts.length > 0 ? (
-        <ol>
-          {posts.map((post) => {
-            return <li key={post.id}>{post.title}</li>;
-          })}
-        </ol>
-      ): (
-      <div>データは空です</div>
-      )
-    }
-    </div>
+    <ol>
+      {posts.map((post) => {
+        return <li key={post.id}>{post.title}</li>;
+      })}
+    </ol>
   )
 }
-
-export default Posts;
