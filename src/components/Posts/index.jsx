@@ -1,14 +1,32 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useReducer } from "react"
+
+const initialState = {
+  data: [],
+  loading: true,
+  error: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "end":
+      return {
+        ...state,
+        data: action.data,
+        loading: false,
+      };
+    case "error":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      }
+    default:
+      throw new Error("no such action type!");
+  }
+}
 
 export const Posts = () => {
-  // const [posts, setPosts] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-  const [state, setState] = useState({
-    data: [],
-    loading: true,
-    error: null,
-  })
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const getPosts = useCallback(async () => {
     try {
@@ -17,26 +35,9 @@ export const Posts = () => {
         throw new Error("エラーが発生したため、データの取得に失敗しました。")
       }
       const json = await res.json();
-      setState((prevState) => {
-        return {
-          ...prevState,
-          /* これと同じ。書き換えたいところだけを上書きする。
-          data: [],
-          loading: true,
-          error: null,
-          */
-          data: json,
-          loading: false,
-        };
-      })
+      dispatch({ type:"end", data: json });
     } catch (error) {
-      setState((prevState) => {
-        return {
-          ...prevState,
-          loading: false,
-          error,
-        };
-      })
+      dispatch({ type:"error", error });
     }
   }, []);
 
